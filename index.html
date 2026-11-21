@@ -1,0 +1,83 @@
+---
+layout: default
+title: Inicio
+description: Recursos, artículos y publicaciones para la adoración en familia y el estudio personal.
+---
+<section class="hero">
+  <div class="hero__content">
+    <p class="eyebrow eyebrow--light">Un espacio para aprender y compartir</p>
+    <h1>Fortalezcamos juntos la adoración en familia</h1>
+    <p class="hero__intro">Encuentra ideas, recursos y publicaciones que ayudan a disfrutar del estudio personal y de momentos significativos en familia.</p>
+    <div class="hero__actions">
+      <a class="button button--light" href="#paginas">Explorar recursos <span aria-hidden="true">→</span></a>
+      <a class="button button--outline" href="{{ '/articulos/' | relative_url }}">Leer artículos</a>
+    </div>
+  </div>
+  <div class="hero__ornament" aria-hidden="true">
+    <span class="ornament-ring ornament-ring--one"></span>
+    <span class="ornament-ring ornament-ring--two"></span>
+    <span class="ornament-mark">AF</span>
+  </div>
+</section>
+
+<section class="section" id="paginas">
+  <div class="section__heading">
+    <div>
+      <p class="eyebrow">Biblioteca de recursos</p>
+      <h2>Explora nuestras páginas</h2>
+      <p class="section__intro">Material organizado para consultar y utilizar a tu propio ritmo.</p>
+    </div>
+    <span class="count-label">{{ site.paginas | size }} recursos</span>
+  </div>
+  <div class="cards">
+    {% assign coleccion_paginas = site.paginas | default: empty %}
+    {% assign paginas_publicadas = coleccion_paginas | where: "published", true | sort: "title" %}
+    {% for pagina in paginas_publicadas %}
+      <article class="content-card">
+        <span class="card-icon" aria-hidden="true">✦</span>
+        <p class="content-card__type">Recurso</p>
+        <h3><a href="{{ pagina.url | relative_url }}">{{ pagina.title }}</a></h3>
+        {% if pagina.description %}<p class="content-card__description">{{ pagina.description }}</p>{% else %}<p class="content-card__description">Consulta este material y descubre ideas para poner en práctica.</p>{% endif %}
+        <a class="text-link" href="{{ pagina.url | relative_url }}">Leer recurso <span aria-hidden="true">→</span></a>
+      </article>
+    {% else %}
+      <div class="empty-state">
+        <strong>Próximamente habrá nuevos recursos.</strong>
+        <p>Las páginas que se publiquen en la carpeta <code>_paginas</code> aparecerán aquí automáticamente.</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section section--articles">
+  <div class="section__heading">
+    <div>
+      <p class="eyebrow">Lecturas y novedades</p>
+      <h2>Publicaciones recientes</h2>
+      <p class="section__intro">Artículos para leer, reflexionar y compartir.</p>
+    </div>
+    <a class="text-link" href="{{ '/articulos/' | relative_url }}">Ver todas las publicaciones <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="article-list">
+    {% assign articulos = site.posts | where: "published", true %}
+    {% for articulo in articulos limit: 4 %}
+      <article class="article-row">
+        <div class="article-row__main">
+          <p class="content-card__type">{{ articulo.date | date: "%d de %B de %Y" }}</p>
+          <h3><a href="{{ articulo.url | relative_url }}">{{ articulo.title }}</a></h3>
+          {% if articulo.description %}<p>{{ articulo.description }}</p>{% elsif articulo.excerpt %}<p>{{ articulo.excerpt | strip_html | truncate: 170 }}</p>{% endif %}
+        </div>
+        <a class="article-arrow" href="{{ articulo.url | relative_url }}" aria-label="Leer {{ articulo.title }}">↗</a>
+      </article>
+    {% else %}
+      <div class="empty-state"><strong>Aún no hay publicaciones.</strong><p>Los artículos añadidos a <code>_posts</code> aparecerán en esta sección.</p></div>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="closing-panel">
+  <p class="eyebrow eyebrow--light">Crecer y aprender</p>
+  <h2>Un recurso útil puede inspirar una buena conversación.</h2>
+  <p>Explora el contenido disponible y compártelo con quienes puedan aprovecharlo.</p>
+  <a class="button button--light" href="#paginas">Ver recursos <span aria-hidden="true">→</span></a>
+</section>
