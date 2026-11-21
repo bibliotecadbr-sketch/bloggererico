@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NexusHub — Portal de Recursos, Páginas y Entradas</title>
+    <title>NexusHub — Portal de Recursos y Publicación de Enlaces</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,7 @@
     <header class="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between py-3.5 gap-3 lg:gap-4">
-
+                
                 <div class="flex items-center justify-between">
                     <a href="#" class="flex items-center gap-2.5 group focus:outline-none">
                         <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
@@ -44,16 +44,16 @@
                         </div>
                         <div>
                             <span class="text-lg font-bold tracking-tight text-slate-900">Nexus<span class="text-brand-600">Hub</span></span>
-                            <span class="hidden sm:inline-block ml-2 text-[11px] font-medium px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 border border-brand-100">Páginas y Entradas</span>
+                            <span class="hidden sm:inline-block ml-2 text-[11px] font-medium px-2 py-0.5 rounded-full bg-brand-50 text-brand-700 border border-brand-100">Publisher</span>
                         </div>
                     </a>
 
-                    <div class="flex items-center gap-1.5 lg:hidden">
-                        <button type="button" onclick="openPublishModal()" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold shadow-sm transition-colors">
-                            <span>+ Página</span>
-                        </button>
-                        <button type="button" onclick="openEntryModal()" class="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition-colors">
-                            <span>+ Entrada</span>
+                    <div class="flex items-center gap-2 lg:hidden">
+                        <button type="button" onclick="openPublishModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold shadow-sm transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                            </svg>
+                            <span>Publicar</span>
                         </button>
                         <button id="mobile-menu-btn" type="button" aria-label="Abrir menú" class="p-2 rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
@@ -64,35 +64,28 @@
                 </div>
 
                 <div id="nav-content" class="hidden lg:flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-4 w-full lg:w-auto pt-2 lg:pt-0 border-t lg:border-t-0 border-slate-100">
-                    <!-- Selector de Vista -->
-                    <div class="inline-flex rounded-xl bg-slate-100 p-1 text-xs font-semibold">
-                        <button type="button" id="tab-all" onclick="setViewMode('all')" class="view-tab px-3 py-1 rounded-lg bg-white text-slate-900 shadow-sm transition-all cursor-pointer">Todo</button>
-                        <button type="button" id="tab-pages" onclick="setViewMode('pages')" class="view-tab px-3 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition-all cursor-pointer">Páginas</button>
-                        <button type="button" id="tab-entries" onclick="setViewMode('entries')" class="view-tab px-3 py-1 rounded-lg text-slate-600 hover:text-slate-900 transition-all cursor-pointer">Entradas</button>
-                    </div>
+                    <nav id="category-nav" aria-label="Categorías" class="flex flex-wrap items-center gap-1.5 text-sm font-medium text-slate-600"></nav>
 
-                    <nav id="category-nav" aria-label="Categorías" class="flex flex-wrap items-center gap-1 text-sm font-medium text-slate-600"></nav>
-
-                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
-                        <div class="relative w-full sm:w-48">
+                    <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+                        <div class="relative w-full sm:w-56">
                             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                 <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11A6 6 0 115 11a6 6 0 0112 0z" />
                                 </svg>
                             </div>
-                            <input type="search" id="search-input" placeholder="Buscar..." class="w-full pl-9 pr-7 py-1.5 text-sm bg-slate-100/80 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all">
-                            <button id="clear-search" type="button" class="hidden absolute inset-y-0 right-0 pr-2 flex items-center text-slate-400 hover:text-slate-600">
+                            <input type="search" id="search-input" placeholder="Buscar página..." class="w-full pl-9 pr-8 py-1.5 text-sm bg-slate-100/80 border border-slate-200 rounded-xl text-slate-800 placeholder-slate-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500/40 focus:border-brand-500 transition-all">
+                            <button id="clear-search" type="button" class="hidden absolute inset-y-0 right-0 pr-2.5 flex items-center text-slate-400 hover:text-slate-600">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             </button>
                         </div>
 
-                        <button type="button" onclick="openPublishModal()" class="hidden lg:inline-flex items-center justify-center gap-1 px-3.5 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-semibold shadow-sm transition-all cursor-pointer">
-                            <span>+ Página</span>
-                        </button>
-                        <button type="button" onclick="openEntryModal()" class="hidden lg:inline-flex items-center justify-center gap-1 px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition-all cursor-pointer">
-                            <span>+ Entrada</span>
+                        <button type="button" onclick="openPublishModal()" class="hidden lg:inline-flex items-center justify-center gap-1.5 px-4 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold shadow-sm shadow-brand-500/20 transition-all cursor-pointer">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                            </svg>
+                            <span>Publicar página</span>
                         </button>
                     </div>
                 </div>
@@ -107,80 +100,55 @@
             <div class="max-w-2xl">
                 <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-semibold mb-3">
                     <span class="w-2 h-2 rounded-full bg-indigo-500 animate-pulse"></span>
-                    Directorio de Enlaces y Bitácora de Entradas
+                    Directorio Interactivo de Enlaces
                 </div>
                 <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 mb-2.5">
-                    Biblioteca de Páginas y Publicación de Entradas
+                    Biblioteca Central de Recursos
                 </h1>
                 <p class="text-base text-slate-600 leading-relaxed">
-                    Administra tus 12 tarjetas de enlaces iniciales, publica nuevas páginas y redacta entradas completas con notas, guías o novedades.
+                    Explora los recursos iniciales o publica tus propias páginas, herramientas y enlaces favoritos con organización automática por categorías.
                 </p>
             </div>
             <div class="flex flex-wrap items-center gap-3 shrink-0">
-                <button type="button" onclick="openPublishModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold shadow-md shadow-brand-500/20 transition-all cursor-pointer">
+                <button type="button" onclick="openPublishModal()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-semibold shadow-md shadow-brand-500/20 transition-all cursor-pointer">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                     </svg>
-                    <span>Publicar página</span>
-                </button>
-                <button type="button" onclick="openEntryModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-md shadow-emerald-500/20 transition-all cursor-pointer">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                    </svg>
-                    <span>Publicar entrada</span>
+                    <span>+ Publicar nueva página</span>
                 </button>
             </div>
         </div>
     </section>
 
     <!-- Contenido Principal -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 space-y-12">
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+        <div class="flex flex-wrap items-center justify-between gap-2 mb-6 text-sm text-slate-500">
+            <p id="results-counter">Cargando recursos...</p>
+            <span class="text-xs text-slate-400">Puedes copiar, editar o eliminar cualquier tarjeta</span>
+        </div>
 
-        <!-- SECCIÓN 1: ENTRADAS PUBLICADAS -->
-        <section id="entries-section" class="space-y-5">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-                <div>
-                    <h2 class="text-xl font-bold text-slate-900">Entradas recientes</h2>
-                    <p id="entries-counter" class="text-sm text-slate-500">Cargando entradas...</p>
-                </div>
-                <button type="button" onclick="openEntryModal()" class="text-sm font-semibold text-emerald-700 hover:text-emerald-800">+ Nueva entrada</button>
-            </div>
+        <!-- Cuadrícula de Tarjetas -->
+        <div id="cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6"></div>
 
-            <div id="entries-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-        </section>
-
-        <!-- SECCIÓN 2: TARJETAS DE PÁGINAS -->
-        <section id="pages-section" class="space-y-5">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-                <div>
-                    <h2 class="text-xl font-bold text-slate-900">Páginas y recursos</h2>
-                    <p id="pages-counter" class="text-sm text-slate-500">Cargando páginas...</p>
-                </div>
-                <span class="text-xs text-slate-400">12 tarjetas iniciales + páginas publicadas</span>
-            </div>
-
-            <div id="cards-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6"></div>
-        </section>
-
-        <!-- Estado vacío global -->
+        <!-- Estado vacío -->
         <div id="empty-state" class="hidden text-center py-16 px-4 bg-white rounded-2xl border border-dashed border-slate-300">
-            <p class="text-base font-semibold text-slate-800 mb-1">No se encontraron resultados con ese filtro</p>
-            <p class="text-sm text-slate-500 mb-4">Prueba con otra palabra clave, cambia la categoría o publica una nueva entrada.</p>
-            <button type="button" onclick="resetFilters()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium transition-colors">Restablecer filtros</button>
+            <p class="text-base font-semibold text-slate-800 mb-1">No se encontraron páginas con ese filtro</p>
+            <p class="text-sm text-slate-500 mb-4">Prueba con otra búsqueda o publica un nuevo enlace.</p>
+            <button type="button" onclick="resetFilters()" class="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-medium transition-colors">Mostrar todas las páginas</button>
         </div>
     </main>
 
-    <!-- Pie de página -->
+    <!-- Pie de página con Respaldo JSON -->
     <footer class="bg-white border-t border-slate-200/80 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-            <p>NexusHub — Portal Estático con Páginas y Entradas</p>
+            <p>NexusHub — Portal Estático con Publicación Local</p>
             <div class="flex flex-wrap items-center gap-2">
                 <button type="button" onclick="exportJSON()" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium transition-colors">Exportar JSON</button>
                 <label class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 font-medium transition-colors cursor-pointer">
                     Importar JSON
                     <input type="file" id="import-file" accept=".json" class="hidden" onchange="importJSON(event)">
                 </label>
-                <button type="button" onclick="restoreDefaults()" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-red-50 hover:text-red-600 hover:border-red-200 text-slate-600 font-medium transition-colors">Restaurar datos iniciales</button>
+                <button type="button" onclick="restoreDefaults()" class="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-red-50 hover:text-red-600 hover:border-red-200 text-slate-600 font-medium transition-colors">Restaurar 12 iniciales</button>
             </div>
         </div>
     </footer>
@@ -189,7 +157,7 @@
     <div id="publish-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-white rounded-2xl max-w-lg w-full p-6 shadow-2xl border border-slate-200">
             <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
-                <h3 id="page-modal-title" class="text-lg font-bold text-slate-900">Publicar nueva página</h3>
+                <h3 id="modal-title" class="text-lg font-bold text-slate-900">Publicar nueva página</h3>
                 <button type="button" onclick="closePublishModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -198,7 +166,7 @@
             </div>
 
             <form id="publish-form" class="space-y-4">
-                <input type="hidden" id="edit-page-id">
+                <input type="hidden" id="edit-id">
                 <div>
                     <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Título de la página *</label>
                     <input type="text" id="page-title" required maxlength="60" placeholder="Ej. Documentación Python" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500">
@@ -213,6 +181,12 @@
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Categoría *</label>
                         <input type="text" id="page-category" list="category-suggestions" required placeholder="Desarrollo, Diseño..." class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500">
+                        <datalist id="category-suggestions">
+                            <option value="Desarrollo">
+                            <option value="Diseño">
+                            <option value="IA y Datos">
+                            <option value="Productividad">
+                        </datalist>
                     </div>
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Color de etiqueta</label>
@@ -239,96 +213,11 @@
         </div>
     </div>
 
-    <!-- Modal para Publicar / Editar Entrada -->
-    <div id="entry-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 shadow-2xl border border-slate-200">
-            <div class="flex items-center justify-between pb-3 border-b border-slate-100 mb-4">
-                <h3 id="entry-modal-title" class="text-lg font-bold text-slate-900">Publicar nueva entrada</h3>
-                <button type="button" onclick="closeEntryModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-
-            <form id="entry-form" class="space-y-4">
-                <input type="hidden" id="edit-entry-id">
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Título de la entrada *</label>
-                    <input type="text" id="entry-title" required maxlength="100" placeholder="Ej. Notas sobre despliegue estático y automatización" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                </div>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Categoría *</label>
-                        <input type="text" id="entry-category" list="category-suggestions" required placeholder="Desarrollo, Productividad..." class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Etiquetas (separadas por coma)</label>
-                        <input type="text" id="entry-tags" placeholder="github, guía, notas" class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Resumen corto *</label>
-                    <input type="text" id="entry-summary" required maxlength="180" placeholder="Idea principal de la entrada en una línea..." class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500">
-                </div>
-
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Contenido de la entrada *</label>
-                    <textarea id="entry-content" required rows="6" placeholder="Escribe aquí el desarrollo completo de tu entrada..." class="w-full px-3.5 py-2 text-sm border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500"></textarea>
-                </div>
-
-                <div class="pt-3 border-t border-slate-100 flex items-center justify-end gap-2.5">
-                    <button type="button" onclick="closeEntryModal()" class="px-4 py-2 rounded-xl border border-slate-200 text-sm font-medium text-slate-600 hover:bg-slate-50">Cancelar</button>
-                    <button type="submit" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold shadow-sm">Publicar entrada</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <!-- Modal Lectura Completa de Entrada -->
-    <div id="read-entry-modal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200">
-            <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-100 mb-5">
-                <div>
-                    <div class="flex items-center gap-2 mb-2">
-                        <span id="read-entry-category" class="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700"></span>
-                        <span id="read-entry-date" class="text-xs text-slate-400"></span>
-                    </div>
-                    <h3 id="read-entry-title" class="text-2xl font-bold text-slate-900"></h3>
-                </div>
-                <button type="button" onclick="closeReadEntryModal()" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-
-            <p id="read-entry-summary" class="text-sm font-medium text-slate-700 bg-slate-50 p-3.5 rounded-xl border border-slate-200/70 mb-5"></p>
-            <div id="read-entry-content" class="text-sm sm:text-base text-slate-600 leading-relaxed whitespace-pre-line mb-6"></div>
-            <div id="read-entry-tags" class="flex flex-wrap gap-1.5 pb-4 border-t border-slate-100 pt-4"></div>
-
-            <div class="flex justify-end">
-                <button type="button" onclick="closeReadEntryModal()" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-semibold">Cerrar lectura</button>
-            </div>
-        </div>
-    </div>
-
-    <datalist id="category-suggestions">
-        <option value="Desarrollo">
-        <option value="Diseño">
-        <option value="IA y Datos">
-        <option value="Productividad">
-        <option value="Guías y Notas">
-    </datalist>
-
     <!-- Notificación Toast -->
     <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 text-white text-xs font-medium px-4 py-2.5 rounded-xl shadow-lg pointer-events-none"></div>
 
     <script>
-        const PAGES_KEY = 'nexushub_pages_v2';
-        const ENTRIES_KEY = 'nexushub_entries_v1';
+        const STORAGE_KEY = 'nexushub_pages_v2';
 
         const DEFAULT_PAGES = [
             { id: '1', title: 'MDN Web Docs', url: 'https://developer.mozilla.org/es/', category: 'Desarrollo', color: 'blue', desc: 'Documentación oficial y guías técnicas de referencia para estándares HTML, CSS, JavaScript y APIs web.' },
@@ -345,27 +234,6 @@
             { id: '12', title: 'Excalidraw', url: 'https://excalidraw.com', category: 'Productividad', color: 'indigo', desc: 'Pizarra virtual colaborativa estilo boceto a mano alzada para diagramas de arquitectura y esquemas rápidos.' }
         ];
 
-        const DEFAULT_ENTRIES = [
-            {
-                id: 'e-1',
-                title: 'Guía rápida para mantener sitios estáticos sin errores en GitHub Pages',
-                category: 'Desarrollo',
-                tags: ['github pages', 'estático', 'nojekyll'],
-                summary: 'Resumen práctico sobre cómo evitar el procesamiento Liquid de Jekyll en archivos HTML puros.',
-                content: 'Cuando publicas un archivo index.html estático con llaves dobles o scripts complejos, Jekyll puede intentar interpretar el contenido como plantilla Liquid.\n\nAgregar el archivo .nojekyll en la raíz del repositorio indica a GitHub Pages que sirva los archivos directamente sin pasar por el compilador de Jekyll.',
-                date: '2026-11-21'
-            },
-            {
-                id: 'e-2',
-                title: 'Organización de enlaces y notas técnicas en un solo portal',
-                category: 'Productividad',
-                tags: ['organización', 'flujo de trabajo', 'notas'],
-                summary: 'Cómo combinar tarjetas de consulta rápida con entradas detalladas para proyectos y documentación.',
-                content: 'Separar los accesos directos en tarjetas breves y las explicaciones más extensas en entradas facilita encontrar tanto una herramienta puntual como una nota de procedimiento completa.',
-                date: '2026-11-20'
-            }
-        ];
-
         const COLOR_STYLES = {
             blue: { badge: 'bg-blue-50 text-blue-700', icon: 'bg-blue-50 text-blue-600 border-blue-100' },
             pink: { badge: 'bg-pink-50 text-pink-700', icon: 'bg-pink-50 text-pink-600 border-pink-100' },
@@ -374,15 +242,12 @@
             indigo: { badge: 'bg-indigo-50 text-indigo-700', icon: 'bg-indigo-50 text-indigo-600 border-indigo-100' }
         };
 
-        let pages = JSON.parse(localStorage.getItem(PAGES_KEY)) || [...DEFAULT_PAGES];
-        let entries = JSON.parse(localStorage.getItem(ENTRIES_KEY)) || [...DEFAULT_ENTRIES];
+        let pages = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [...DEFAULT_PAGES];
         let activeCategory = 'Todos';
-        let activeView = 'all';
         let searchQuery = '';
 
-        function saveAll() {
-            localStorage.setItem(PAGES_KEY, JSON.stringify(pages));
-            localStorage.setItem(ENTRIES_KEY, JSON.stringify(entries));
+        function savePages() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(pages));
         }
 
         function showToast(msg) {
@@ -392,128 +257,54 @@
             setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 2500);
         }
 
-        function setViewMode(mode) {
-            activeView = mode;
-            document.querySelectorAll('.view-tab').forEach(btn => {
-                btn.classList.remove('bg-white', 'text-slate-900', 'shadow-sm');
-                btn.classList.add('text-slate-600');
-            });
-            const activeTab = document.getElementById(`tab-${mode}`);
-            if (activeTab) {
-                activeTab.classList.add('bg-white', 'text-slate-900', 'shadow-sm');
-                activeTab.classList.remove('text-slate-600');
-            }
-            renderAll();
-        }
-
         function renderCategories() {
             const nav = document.getElementById('category-nav');
-            const allCats = new Set([...pages.map(p => p.category), ...entries.map(e => e.category)]);
-            const categories = ['Todos', ...allCats];
+            const categories = ['Todos', ...new Set(pages.map(p => p.category))];
             nav.innerHTML = categories.map(cat => {
                 const isActive = cat === activeCategory;
                 const cls = isActive
                     ? 'bg-brand-50 text-brand-700 font-semibold'
                     : 'hover:bg-slate-100 hover:text-slate-900';
-                return `<button type="button" onclick="setCategory('${cat.replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${cls}">${cat}</button>`;
+                return `<button type="button" onclick="setCategory('${cat.replace(/'/g, "\\'")}')" class="px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${cls}">${cat}</button>`;
             }).join('');
         }
 
         function setCategory(cat) {
             activeCategory = cat;
             renderCategories();
-            renderAll();
+            renderCards();
         }
 
         function resetFilters() {
             activeCategory = 'Todos';
-            activeView = 'all';
             searchQuery = '';
             document.getElementById('search-input').value = '';
             document.getElementById('clear-search').classList.add('hidden');
-            setViewMode('all');
+            renderCategories();
+            renderCards();
         }
 
-        function matchesFilter(itemText) {
-            const q = searchQuery.toLowerCase();
-            return !q || itemText.toLowerCase().includes(q);
-        }
-
-        function renderEntries() {
-            const section = document.getElementById('entries-section');
-            const grid = document.getElementById('entries-grid');
-            const counter = document.getElementById('entries-counter');
-
-            if (activeView === 'pages') {
-                section.classList.add('hidden');
-                return [];
-            }
-
-            section.classList.remove('hidden');
-            const filtered = entries.filter(entry => {
-                const matchCat = activeCategory === 'Todos' || entry.category === activeCategory;
-                const combined = `${entry.title} ${entry.summary} ${entry.content} ${entry.category} ${(entry.tags || []).join(' ')}`;
-                return matchCat && matchesFilter(combined);
-            });
-
-            counter.innerHTML = `Mostrando <span class="font-semibold text-slate-800">${filtered.length}</span> de ${entries.length} entradas`;
-
-            grid.innerHTML = filtered.map(entry => {
-                const tagsHtml = (entry.tags || []).slice(0, 3).map(tag =>
-                    `<span class="text-[11px] px-2 py-0.5 rounded-md bg-slate-100 text-slate-600">#${tag}</span>`
-                ).join('');
-
-                return `
-                <article class="bg-white rounded-2xl border border-slate-200/90 p-5 shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
-                    <div>
-                        <div class="flex items-center justify-between gap-2 mb-3">
-                            <span class="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700">${entry.category}</span>
-                            <span class="text-xs text-slate-400">${entry.date || ''}</span>
-                        </div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-2 leading-snug">${entry.title}</h3>
-                        <p class="text-sm text-slate-600 leading-relaxed mb-4">${entry.summary}</p>
-                        <div class="flex flex-wrap gap-1.5 mb-5">${tagsHtml}</div>
-                    </div>
-                    <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
-                        <button type="button" onclick="readEntry('${entry.id}')" class="text-sm font-semibold text-emerald-700 hover:text-emerald-800 cursor-pointer">Leer entrada →</button>
-                        <div class="flex items-center gap-1">
-                            <button type="button" onclick="editEntry('${entry.id}')" title="Editar entrada" class="p-1.5 rounded-lg text-slate-400 hover:text-brand-600 hover:bg-brand-50 transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                                </svg>
-                            </button>
-                            <button type="button" onclick="deleteEntry('${entry.id}')" title="Eliminar entrada" class="p-1.5 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 transition-colors">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </article>`;
-            }).join('');
-
-            return filtered;
-        }
-
-        function renderPages() {
-            const section = document.getElementById('pages-section');
+        function renderCards() {
             const grid = document.getElementById('cards-grid');
-            const counter = document.getElementById('pages-counter');
+            const emptyState = document.getElementById('empty-state');
+            const counter = document.getElementById('results-counter');
 
-            if (activeView === 'entries') {
-                section.classList.add('hidden');
-                return [];
-            }
-
-            section.classList.remove('hidden');
             const filtered = pages.filter(p => {
                 const matchCat = activeCategory === 'Todos' || p.category === activeCategory;
-                const combined = `${p.title} ${p.desc} ${p.category} ${p.url}`;
-                return matchCat && matchesFilter(combined);
+                const q = searchQuery.toLowerCase();
+                const matchText = !q || p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+                return matchCat && matchText;
             });
 
             counter.innerHTML = `Mostrando <span class="font-semibold text-slate-800">${filtered.length}</span> de ${pages.length} páginas`;
 
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
             grid.innerHTML = filtered.map(page => {
                 const style = COLOR_STYLES[page.color] || COLOR_STYLES.indigo;
                 return `
@@ -525,7 +316,7 @@
                             </div>
                             <span class="text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full ${style.badge}">${page.category}</span>
                         </div>
-                        <h3 class="text-base font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-1.5">${page.title}</h3>
+                        <h2 class="text-base font-bold text-slate-900 group-hover:text-brand-600 transition-colors mb-1.5">${page.title}</h2>
                         <p class="text-sm text-slate-600 leading-relaxed mb-5">${page.desc}</p>
                     </div>
                     <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
@@ -555,32 +346,22 @@
                     </div>
                 </article>`;
             }).join('');
-
-            return filtered;
-        }
-
-        function renderAll() {
-            const visibleEntries = renderEntries();
-            const visiblePages = renderPages();
-            const emptyState = document.getElementById('empty-state');
-            const totalVisible = visibleEntries.length + visiblePages.length;
-            emptyState.classList.toggle('hidden', totalVisible > 0);
         }
 
         function copyUrl(url) {
             navigator.clipboard.writeText(url).then(() => showToast('Enlace copiado al portapapeles'));
         }
 
-        /* Gestión de Páginas */
         function openPublishModal(page = null) {
-            document.getElementById('page-modal-title').textContent = page ? 'Editar página' : 'Publicar nueva página';
-            document.getElementById('edit-page-id').value = page ? page.id : '';
+            const modal = document.getElementById('publish-modal');
+            document.getElementById('modal-title').textContent = page ? 'Editar página' : 'Publicar nueva página';
+            document.getElementById('edit-id').value = page ? page.id : '';
             document.getElementById('page-title').value = page ? page.title : '';
             document.getElementById('page-url').value = page ? page.url : '';
             document.getElementById('page-category').value = page ? page.category : '';
             document.getElementById('page-color').value = page ? page.color : 'blue';
             document.getElementById('page-desc').value = page ? page.desc : '';
-            document.getElementById('publish-modal').classList.remove('hidden');
+            modal.classList.remove('hidden');
         }
 
         function closePublishModal() {
@@ -593,17 +374,17 @@
         }
 
         function deletePage(id) {
-            if (!confirm('¿Eliminar esta página?')) return;
+            if (!confirm('¿Eliminar esta página del directorio?')) return;
             pages = pages.filter(p => p.id !== id);
-            saveAll();
+            savePages();
             renderCategories();
-            renderAll();
+            renderCards();
             showToast('Página eliminada');
         }
 
         document.getElementById('publish-form').addEventListener('submit', (e) => {
             e.preventDefault();
-            const id = document.getElementById('edit-page-id').value;
+            const id = document.getElementById('edit-id').value;
             const title = document.getElementById('page-title').value.trim();
             let url = document.getElementById('page-url').value.trim();
             if (!/^https?:\/\//i.test(url)) url = 'https://' + url;
@@ -619,120 +400,34 @@
                 showToast('Nueva página publicada');
             }
 
-            saveAll();
+            savePages();
             closePublishModal();
             renderCategories();
-            renderAll();
+            renderCards();
         });
 
-        /* Gestión de Entradas */
-        function openEntryModal(entry = null) {
-            document.getElementById('entry-modal-title').textContent = entry ? 'Editar entrada' : 'Publicar nueva entrada';
-            document.getElementById('edit-entry-id').value = entry ? entry.id : '';
-            document.getElementById('entry-title').value = entry ? entry.title : '';
-            document.getElementById('entry-category').value = entry ? entry.category : '';
-            document.getElementById('entry-tags').value = entry && entry.tags ? entry.tags.join(', ') : '';
-            document.getElementById('entry-summary').value = entry ? entry.summary : '';
-            document.getElementById('entry-content').value = entry ? entry.content : '';
-            document.getElementById('entry-modal').classList.remove('hidden');
-        }
-
-        function closeEntryModal() {
-            document.getElementById('entry-modal').classList.add('hidden');
-        }
-
-        function editEntry(id) {
-            const entry = entries.find(e => e.id === id);
-            if (entry) openEntryModal(entry);
-        }
-
-        function deleteEntry(id) {
-            if (!confirm('¿Eliminar esta entrada?')) return;
-            entries = entries.filter(e => e.id !== id);
-            saveAll();
-            renderCategories();
-            renderAll();
-            showToast('Entrada eliminada');
-        }
-
-        function readEntry(id) {
-            const entry = entries.find(e => e.id === id);
-            if (!entry) return;
-            document.getElementById('read-entry-category').textContent = entry.category;
-            document.getElementById('read-entry-date').textContent = entry.date || '';
-            document.getElementById('read-entry-title').textContent = entry.title;
-            document.getElementById('read-entry-summary').textContent = entry.summary;
-            document.getElementById('read-entry-content').textContent = entry.content;
-            document.getElementById('read-entry-tags').innerHTML = (entry.tags || []).map(tag =>
-                `<span class="text-xs px-2.5 py-1 rounded-full bg-slate-100 text-slate-600">#${tag}</span>`
-            ).join('');
-            document.getElementById('read-entry-modal').classList.remove('hidden');
-        }
-
-        function closeReadEntryModal() {
-            document.getElementById('read-entry-modal').classList.add('hidden');
-        }
-
-        document.getElementById('entry-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            const id = document.getElementById('edit-entry-id').value;
-            const title = document.getElementById('entry-title').value.trim();
-            const category = document.getElementById('entry-category').value.trim();
-            const tags = document.getElementById('entry-tags').value
-                .split(',')
-                .map(t => t.trim())
-                .filter(Boolean);
-            const summary = document.getElementById('entry-summary').value.trim();
-            const content = document.getElementById('entry-content').value.trim();
-            const today = new Date().toISOString().slice(0, 10);
-
-            if (id) {
-                entries = entries.map(item => item.id === id ? { ...item, title, category, tags, summary, content } : item);
-                showToast('Entrada actualizada');
-            } else {
-                entries.unshift({
-                    id: 'e-' + Date.now(),
-                    title,
-                    category,
-                    tags,
-                    summary,
-                    content,
-                    date: today
-                });
-                showToast('Nueva entrada publicada');
-            }
-
-            saveAll();
-            closeEntryModal();
-            renderCategories();
-            renderAll();
-        });
-
-        /* Buscador y Menú Móvil */
         document.getElementById('search-input').addEventListener('input', (e) => {
             searchQuery = e.target.value;
             document.getElementById('clear-search').classList.toggle('hidden', !searchQuery);
-            renderAll();
+            renderCards();
         });
 
         document.getElementById('clear-search').addEventListener('click', () => {
             searchQuery = '';
             document.getElementById('search-input').value = '';
             document.getElementById('clear-search').classList.add('hidden');
-            renderAll();
+            renderCards();
         });
 
         document.getElementById('mobile-menu-btn').addEventListener('click', () => {
             document.getElementById('nav-content').classList.toggle('hidden');
         });
 
-        /* Respaldo JSON */
         function exportJSON() {
-            const payload = { pages, entries };
-            const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+            const blob = new Blob([JSON.stringify(pages, null, 2)], { type: 'application/json' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
-            a.download = 'nexushub-respaldo.json';
+            a.download = 'nexushub-paginas.json';
             a.click();
         }
 
@@ -745,14 +440,11 @@
                     const data = JSON.parse(e.target.result);
                     if (Array.isArray(data)) {
                         pages = data;
-                    } else if (data && typeof data === 'object') {
-                        if (Array.isArray(data.pages)) pages = data.pages;
-                        if (Array.isArray(data.entries)) entries = data.entries;
+                        savePages();
+                        renderCategories();
+                        renderCards();
+                        showToast('Respaldo importado correctamente');
                     }
-                    saveAll();
-                    renderCategories();
-                    renderAll();
-                    showToast('Respaldo importado correctamente');
                 } catch {
                     alert('El archivo JSON no es válido.');
                 }
@@ -761,17 +453,17 @@
         }
 
         function restoreDefaults() {
-            if (!confirm('¿Restaurar las 12 páginas y entradas iniciales?')) return;
+            if (!confirm('¿Restaurar las 12 tarjetas iniciales?')) return;
             pages = [...DEFAULT_PAGES];
-            entries = [...DEFAULT_ENTRIES];
-            saveAll();
-            resetFilters();
+            savePages();
+            activeCategory = 'Todos';
             renderCategories();
-            showToast('Datos iniciales restaurados');
+            renderCards();
+            showToast('12 tarjetas iniciales restauradas');
         }
 
         renderCategories();
-        renderAll();
+        renderCards();
     </script>
 </body>
 </html>
